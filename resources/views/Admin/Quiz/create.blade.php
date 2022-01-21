@@ -1,26 +1,27 @@
 <x-app-layout>
     <x-slot name="header">Quiz oluştur</x-slot>
+    
     <div class="card">
         <div class="card-body">
             <form action="{{ route('quizzes.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label>Quiz Başlığı</label>
-                    <input type="text" name="title" class="form-control" required>
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                 </div>
             
                 <div class="form-group">
                     <label>Quiz Açıklama</label>
                     <br>
-                    <textarea name="description" id=""  rows="5" class="form-control"></textarea>
+                    <textarea name="description" id=""  rows="5" class="form-control" value="{{ old('description') }}"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" id="finished-check">
+                    <input type="checkbox" @if(old('finished_at')) checked @endif id="finished-check">
                     <label>Bitiş Tarihi olacak mı?</label>
                 </div>
-                <div id="date-input" style="display: none"  class="form-group" >
+                <div id="date-input" @if(!old('finished_at')) style="display: none"  @endif  class="form-group" >
                     <label>Bitiş Tarihi </label>
-                    <input  type="datetime-local" name="finished_at" class="form-control">
+                    <input  type="datetime-local" name="finished_at" class="form-control" value="{{ old('finished_at') }}">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success mt-2 w-100">Quiz oluştur</button>
