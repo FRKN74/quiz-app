@@ -4,7 +4,7 @@
     <div class="card border-dark">
         <div class="card-body border-dark">
             <h5 class="card-title">{{ $quiz->title }} Ait Sorular</h5>
-                <a href="{{route('quizzes.create',$quiz->id)}}" class="btn btn-warning"> <i class="fa fa-plus"></i> Soru oluştur</a> 
+                <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-warning"> <i class="fa fa-plus"></i> Soru oluştur</a> 
                 <br>
                 <br>
             <table class="table table-striped table-dark table-sm">

@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
+
 //Model
 
 use App\Models\Question;
 use App\Models\Quiz;
+
+//Request
+use App\Http\Requests\QuestionsCreateRequest;
 
 class QuestionController extends Controller
 {
@@ -28,9 +33,10 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return "vreasd";
+        $quiz = Quiz::find($id);
+        return view('Admin.Question.create',compact('quiz'));
     }
 
     /**
@@ -39,9 +45,19 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionsCreateRequest $request , $id)
     {
-        //
+        if ($request->hasFile('image')) { // requestten gelen bir resim var ise 
+            $fileName= Str::slug($request->question).'.'.$request->image->extension();
+            $fileNameWithUpload = 'uploads/'.$fileName;
+            $request->image->move(public_path('uploads'),$fileName);
+            $request->merge([
+                'image' =>  $fileNameWithUpload
+            ]);
+        }
+        Quiz::find($id)->questions()->create($request->post());
+
+        return redirect()->route('questions.index',$id)->withSuccess('Soru eklendi.');
     }
 
     /**
