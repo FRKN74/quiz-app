@@ -23,8 +23,9 @@
                     <td>{{$quiz->status}}</td>
                     <td>{{$quiz->finished_at}}</td>
                     <td>
-                            <a href="{{ route('quizzes.edit',$quiz->id) }}" class="btn btn-outline-warning"> <i class="fa fa-pen"> </i> Güncelle</a>
-                            <a href="{{ route('quizzes.destroy',$quiz->id) }}" class="btn btn-outline-danger"> <i class="fa fa-trash"> </i> Sil</a>
+                            <a title ="Sorular" href="{{ route('questions.index',$quiz->id) }}" class="btn btn-outline-info"> <i class="fa fa-question"> </i> </a>
+                            <a title ="Güncelle" href="{{ route('quizzes.edit',$quiz->id) }}" class="btn btn-outline-warning"> <i class="fa fa-pen"> </i> </a>
+                            <a title ="Sil" href="{{ route('quizzes.destroy',$quiz->id) }}" class="btn btn-outline-danger"> <i class="fa fa-trash"> </i> </a>
                     </td>
                     </tr>
                     @endforeach
