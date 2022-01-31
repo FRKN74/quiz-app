@@ -1,13 +1,13 @@
 require('./bootstrap');
 require('jquery');
 
-import Alpine from 'alpinejs';
-import $ from 'jquery';
-
 window.Alpine = Alpine;
 
+import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
+import Alpine from 'alpinejs';
+
 
 
 Alpine.start();
