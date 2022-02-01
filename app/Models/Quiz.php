@@ -14,6 +14,13 @@ class Quiz extends Model
         'description',
     ];
 
+    protected $dates = ['finished_at'];
+    /*
+    public function getFinishedAtAttribute($dates)
+    {
+        return $dates ? Carbon::parse($date) : null;
+    }
+    */
     public function questions()
     {
         return $this->hasMany('App\Models\Question');

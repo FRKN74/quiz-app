@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                     <th scope="col">Quiz</th>
+                    <th scope="col">Soru sayısı</th>
                     <th scope="col">Durum</th>
                     <th scope="col">Bitiş tarihi</th>
                     <th scope="col">İşlemler</th>
@@ -20,8 +21,23 @@
                 @foreach ($quizzes as $quiz)
                     <tr>
                     <th>{{$quiz->title}}</th>
-                    <td>{{$quiz->status}}</td>
-                    <td>{{$quiz->finished_at}}</td>
+                    <th class="text-center">{{$quiz->questions_count}}</th>
+                    <td>
+                        @switch($quiz->status)
+                            @case('publish')
+                            <span class="badge badge-success">Aktif</span>
+                                @break
+                            @case('passive')
+                            <span class="badge badge-danger">Pasif</span>
+                                @break
+                            @case('draft')
+                            <span class="badge badge-secondary">Taslak</span>
+                                @break
+                            @default
+                                
+                        @endswitch
+                    </td>
+                    <td class="text-center" title="{{ $quiz->finished_at }}">{{ $quiz->finished_at ? $quiz->finished_at->diffForHumans() : "-"}}</td>
                     <td>
                             <a title ="Sorular" href="{{ route('questions.index',$quiz->id) }}" class="btn btn-outline-info"> <i class="fa fa-question"> </i> </a>
                             <a title ="Güncelle" href="{{ route('quizzes.edit',$quiz->id) }}" class="btn btn-outline-warning"> <i class="fa fa-pen"> </i> </a>
