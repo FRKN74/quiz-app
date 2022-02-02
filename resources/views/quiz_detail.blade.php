@@ -35,7 +35,7 @@
                 </div>
                 
             </p>
-            <a href="#" class="btn btn-primary d-block mt-5">Quize katıl</a>
+            <a href="{{ route('quiz.join',$quiz->slug) }}" class="btn btn-primary d-block mt-5">Quize katıl</a>
         </div>
         <div class="card-footer text-muted text-center bg-dark text-white border-primary">
             {{ $quiz->finished_at ? $quiz->finished_at->diffForHumans() : "Bitiş tarihi yok"}} 
