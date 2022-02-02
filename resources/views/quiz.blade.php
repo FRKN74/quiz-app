@@ -8,7 +8,8 @@
         <div class="card-body bg-dark text-white ">
             <p class="card-text bg-dark text-white ">
 
-                <form action="">
+                <form action="{{ route('quiz.result',$quiz->slug) }}" method="POST">
+                    @csrf
                 @foreach ($quiz->questions as $question)
 
                 <strong> <small class="badge badge-info">{{ $loop->iteration }}. </small> {{ $question->question }}</strong>
