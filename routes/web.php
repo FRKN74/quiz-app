@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\MainController;
 
 /*"
 |--------------------------------------------------------------------------
@@ -19,9 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/panel', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('panel',[MainController::class,'dashboard'])->name('dashboard');
+    Route::get('/quiz/{slug}',[MainController::class,'quiz_detail'])->name('quiz_detail');
+});
 
 Route::group(['middleware' => ['auth','isAdmin'],'prefix' => 'admin'], function (){
 

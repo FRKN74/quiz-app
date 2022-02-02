@@ -8,6 +8,7 @@
             <a href="{{route('questions.create',$quiz->id)}}"  class="btn btn-warning">  <i class="fa fa-plus"></i> Soru oluştur</a> 
                 <br>
                 <br>
+                
             <table class="table table-striped table-dark table-sm">
                 <thead>
                     <tr>

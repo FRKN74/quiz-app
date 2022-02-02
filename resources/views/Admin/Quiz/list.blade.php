@@ -1,14 +1,33 @@
 <x-app-layout>
     <x-slot name="header">Quizler</x-slot>
 
-    <div class="card border-dark">
-        <div class="card-body border-dark">
-            <h5 class="card-title">Quizler</h5>
+    <div class="card border-primary">
+        <div class="card-body bg-dark text-white border-primary">
+            <h5 class="card-title float-right">Quizler
                 <a href="{{route('quizzes.create')}}" class="btn btn-warning"> <i class="fa fa-plus"></i> Quiz oluştur</a> 
-                <br>
-                <br>
-            <table class="table table-striped table-dark">
-                <thead>
+            </h5>
+                <form method="GET" action="#">
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <input type="text" name="title" value="{{ request()->get('title') }}" placeholder="Quiz adı" id="" class="form-control bg-dark border-primary text-white">
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <select name="status" id=""  class="form-control bg-dark border-primary text-white" onchange="this.form.submit()">
+                                <option value="">Durum şeçiniz...</option>
+                                <option @if(request()->get('status')=== "publish") selected @endif value="publish">Aktif</option>
+                                <option @if(request()->get('status')=== "passive") selected @endif value="passive">Pasif</option>
+                                <option @if(request()->get('status')=== "draft") selected @endif value="draft">Taslak</option>
+                            </select>
+                        </div>
+                        @if(request()->get('title') || request()->get('status'))
+                            <div class="col-md-2 mb-2">
+                                <a href="{{ route('quizzes.index') }}" class="btn btn-outline-secondary">Sıfırla</a>
+                            </div>
+                        @endif
+                    </div>
+                </form>
+            <table class="table table-striped table-dark border-primary">
+                <thead class=" border-primary">
                     <tr>
                     <th scope="col">Quiz</th>
                     <th scope="col">Soru sayısı</th>
@@ -47,7 +66,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$quizzes->links()}}
+            {{$quizzes->withQueryString()->links()}} <!-- withQuertString = oluşturduğumuz query sistemini linkede ekle diyoruz. -->
         </div>
     </div>
 
