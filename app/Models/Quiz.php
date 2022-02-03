@@ -27,7 +27,7 @@ class Quiz extends Model
         return $dates ? Carbon::parse($date) : null;
     }
     */
-    protected $appends = ['details'];
+    protected $appends = ['details','myrank'];
     public function questions()
     {
         return $this->hasMany('App\Models\Question');
@@ -50,6 +50,16 @@ class Quiz extends Model
             
         }
         return null;
+    }
+    public function getMyRankAttribute()
+    {
+        $rank = 0;
+        foreach ($this->results()->OrderByDesc('point')->get() as $result) {
+            $rank +=1;
+            if(auth()->user()->id == $result->user_id){
+                return $rank;
+            }
+        }
     }
     public function topTen()
     {

@@ -10,6 +10,13 @@
                 <div class="row">
                     <div class="col-md-4">
                         <ul class="list-group ">
+                            @if ($quiz->my_rank)
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white border-primary">
+                                Sıralaman:
+                                <span class="badge badge-warning">{{ $quiz->my_rank }}</span>
+                            </li>
+                            <hr>
+                            @endif
                             @if ($quiz->my_result)
                                 <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white border-primary">
                                     Doğru Sayısı:
