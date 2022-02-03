@@ -21,13 +21,17 @@ class MainController extends Controller
     }
     public function quiz_detail($slug)
     {
-        $quiz = Quiz::whereSlug($slug)->withCount('questions')->first() ?? abort(404,'QUİZ BULUNAMADI');
+        $quiz = Quiz::whereSlug($slug)->with('my_result','results')->withCount('questions','results')->first() ?? abort(404,'QUİZ BULUNAMADI');
         return view('quiz_detail',compact('quiz'));
     }
     public function result(Request $request,$slug)
     {
         $quiz = Quiz::with('questions')->whereSlug($slug)->first() ?? abort(404,'QUİZ BULUNAMADI');
         $correct = 0;
+
+        if ($quiz->my_result) {
+            abort(404,"BU QUİZE DAHA ÖNCE KATILIM SAĞLADINIZ.");
+        }
         foreach($quiz->questions as $question) {
             //echo $question->id.' - '.$question->correct_answer.' / '.$request->post($question->id).'<br>';
 
