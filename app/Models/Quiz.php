@@ -51,6 +51,10 @@ class Quiz extends Model
         }
         return null;
     }
+    public function topTen()
+    {
+        return $this->results()->OrderByDesc('point')->take(2);
+    }
     public function sluggable()
     {
         return [

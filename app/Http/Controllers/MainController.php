@@ -21,7 +21,7 @@ class MainController extends Controller
     }
     public function quiz_detail($slug)
     {
-        $quiz = Quiz::whereSlug($slug)->with('my_result','results')->withCount('questions','results')->first() ?? abort(404,'QUİZ BULUNAMADI');
+        $quiz = Quiz::whereSlug($slug)->with('my_result','topTen.user')->withCount('questions','results')->first() ?? abort(404,'QUİZ BULUNAMADI');
         return view('quiz_detail',compact('quiz'));
     }
     public function result(Request $request,$slug)
