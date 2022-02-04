@@ -23,6 +23,11 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
+    public function result()
+    {
+        return $this->hasMany('App\Models\Result');
+    }
     protected $fillable = [
         'name',
         'email',

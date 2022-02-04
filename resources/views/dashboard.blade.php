@@ -18,7 +18,22 @@
             {{ $quizzes->links() }}
         </div>
         <div class="col-md-4">
-            list
+            <div class="card bg-dark border-primary text-white">
+                <div class="card-header">
+                    Quiz Sonuçlarım
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach ($results as $result )
+                        <a href="{{ route('quiz_detail',$result->quiz->slug) }}" class="btn btn-dark">
+                            <li class="list-group-item bg-dark border-primary text-white">
+                                {{ $result->quiz->title }}
+                                <strong class="badge badge-success float-end">{{ $result->point }}</strong>
+                            
+                            </li>
+                        </a>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 </x-app-layout>

@@ -63,7 +63,8 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        //
+        $quiz = Quiz::whereId($id)->with('topTen.user','results.user')->withCount('questions','results')->first() ?? abort(404,'QUİZ BULUNAMADI');
+        return view('Admin.Quiz.show',compact('quiz'));
     }
 
     /**

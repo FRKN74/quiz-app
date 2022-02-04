@@ -62,8 +62,9 @@
                         @if ($quiz->my_result)
                         <a href="{{ route('quiz.join',$quiz->slug) }}" class="btn btn-warning d-block mt-5">Sınavı görüntüle</a>
                         @else
-            
-                        <a href="{{ route('quiz.join',$quiz->slug) }}" class="btn btn-primary d-block mt-5">Quize katıl</a>
+                            @if ($quiz->finished_at > now())
+                                <a href="{{ route('quiz.join',$quiz->slug) }}" class="btn btn-primary d-block mt-5">Quize katıl</a>
+                            @endif
                         @endif
                         <hr>
 
